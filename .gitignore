@@ -1,0 +1,37 @@
+# Ambientes Virtuais Python
+.venv/
+env/
+venv/
+ENV/
+
+# Byte-code / Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Variáveis de Ambiente e Credenciais
+.env
+.env.local
+.env.*.local
+
+# Banco de Dados e Logs Locais
+*.sqlite3
+*.log
+data/quarantine/*.csv
+
+# IDEs e Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Testes e Cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Next.js
+src/web/node_modules/
+src/web/.next/
+src/web/out/

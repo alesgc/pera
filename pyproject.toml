@@ -1,0 +1,84 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecosystem-financeiro"
+version = "1.0.0"
+description = "Plataforma analítica e operacional integrada para gestão financeira e de investimentos (ETL, PostgreSQL, FastAPI, Next.js, Power BI)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [
+    { name = "alesgc", email = "dev@exemplo.com" }
+]
+keywords = [
+    "finance", 
+    "etl", 
+    "fastapi", 
+    "postgresql", 
+    "data-engineering", 
+    "analytics", 
+    "powerbi"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial",
+]
+
+# Dependências Principais de Produção
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.28.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+    "sqlalchemy>=2.0.28",
+    "psycopg2-binary>=2.9.9",
+    "pandas>=2.2.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.1",
+    "python-multipart>=0.0.9"
+]
+
+# Dependências de Desenvolvimento e Testes
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.27.0",
+    "ruff>=0.3.0",
+    "black>=24.2.0",
+    "mypy>=1.8.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/alesgc/ecosystem-financeiro"
+Repository = "https://github.com/alesgc/ecosystem-financeiro.git"
+Documentation = "https://github.com/alesgc/ecosystem-financeiro/tree/main/docs"
+
+# ==========================================
+# CONFIGURAÇÕES DAS FERRAMENTAS DE DEV
+# ==========================================
+
+# Formatação de Código (Black)
+[tool.black]
+line-length = 88
+target-version = ['py312']
+include = '\.pyi?$'
+
+# Linter (Ruff)
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+# Execução de Testes Unitários (Pytest)
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q --cov=src"
+testpaths = ["tests"]
+pythonpath = ["."]
