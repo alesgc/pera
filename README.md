@@ -1,76 +1,105 @@
-# 🚀 Ecosystem Financeiro & Analítico (End-to-End)
+# 🍐 PERA — Ecosystem Financeiro & Analítico
 
-> **Categoria:** Python / SQL / Web  
-> **Links:** [Repositório](https://github.com/alesgc/ecosystem-financeiro) | [Deploy](https://finance-ecosystem.vercel.app)
-
-<!-- PORTFOLIO:SUMMARY_START -->
-Plataforma analítica e operacional integrada para gestão financeira e de investimentos. Une pipeline de ingestão ETL automatizado em Python, persistência relacional em PostgreSQL, API REST de alta performance em FastAPI, interface interativa em Next.js, relatórios analíticos em Power BI e sistema de mensageria para alertas orçamentários.
-<!-- PORTFOLIO:SUMMARY_END -->
+> **Pēra** *(do latim pēra: saquinho de moedas / bolsa de cinto medieval)*  
+> Plataforma de Engenharia de Dados, Analytics e Gestão de Ativos Multimoeda.
 
 ---
 
-## 📌 01. Motivação & Contexto
-<!-- PORTFOLIO:MOTIVATION_START -->
-A fragmentação de dados financeiros em múltiplos extratos bancários, planilhas manuais e corretoras dificulta a consolidação do patrimônio líquido e o controle rigoroso de despesas. A falta de padronização gera inconsistências, impede a identificação oportuna de estouros de orçamento e torna o cálculo do preço médio de ativos de investimentos um processo lento e propenso a falhas humanas. 
+## 🏛️ Contexto Identitário & Conceito
 
-Este projeto foi concebido para resolver a dor da descentralização, automatizando o ciclo de vida completo do dado: da extração bruta à decisão estratégica visual.
-<!-- PORTFOLIO:MOTIVATION_END -->
+O **Pera** é estruturado conceitualmente como uma solução corporativa de *Wealth Management* e *Financial Analytics*. O nome resgata a origem latina da palavra **pēra** — o saquinho de moedas amarrado ao cinto na Idade Média, que servia como a carteira padrão para o transporte de recursos e moedas de ouro/prata.
 
-## 🛠️ 02. Solução Técnica & Arquitetura
-<!-- PORTFOLIO:SOLUTION_START -->
-Foi projetada uma arquitetura orientada a serviços e pipelines desacoplados (*Clean Architecture* simplificada) cobrindo quatro camadas principais:
-
-1. **Camada de Ingestão e ETL (Python/Pandas/Pydantic):** Leitura idempotente de extratos (CSV/Excel) e cotações de mercado via API. Aplica controle de duplicações via *hash* SHA-256 e validação estrita de esquemas.
-2. **Camada de Armazenamento & Auditoria (PostgreSQL):** Modelo relacional com suporte a tabelas de domínio (transações, categorias, ativos), auditoria mutacional em JSONB (`log_auditoria`), logs de pipeline (`log_etl`) e *Views* analíticas otimizadas para consulta.
-3. **Camada de Serviços & Consumo (FastAPI + Next.js + Power BI):** API REST assíncrona expondo métricas agregadas e endpoints paginados, consumidos por uma interface web responsiva em Next.js/Tailwind e por relatórios em Power BI (com modelos em DAX).
-4. **Motor de Alertas & Mensageria (Worker Python):** Monitor em segundo plano que avalia regras de negócios (ex: estouro de limite por categoria) e dispara notificações automáticas via E-mail e Telegram.
-<!-- PORTFOLIO:SOLUTION_END -->
-
-## 📈 03. Impacto & Resultados
-<!-- PORTFOLIO:IMPACT_START -->
-* **100% de Idempotência:** Eliminação total de transações duplicadas no banco através de verificação por hash SHA-256 no pipeline ETL.
-* **Redução no Tempo de Leitura:** Resposta média de consultas analíticas em sub-100ms utilizando *SQL Views* indexadas para agregações mensais.
-* **Governança de Dados:** Rastreabilidade completa e auditabilidade de alterações via logs em JSONB para conformidade de dados.
-* **Automação de Alertas:** Notificação em tempo real sobre desvios orçamentários sem necessidade de intervenção humana manual.
-<!-- PORTFOLIO:IMPACT_END -->
+Em termos de engenharia, o projeto simula um ecossistema de nível de produção para consolidar dados transacionais e de mercado financeiro, aplicando princípios de **arquitetura limpa, resiliência de ETL, idempotência, auditoria mutacional e modelagem analítica multimoeda**.
 
 ---
 
-## 💻 Guia de Implementação e Execução
-
-### 🛠️ Stack Tecnológica Detalhada
-
-| Camada | Tecnologia / Biblioteca | Versão |
-| :--- | :--- | :--- |
-| **Linguagem Base** | Python | 3.12+ |
-| **Banco de Dados** | PostgreSQL | 15+ |
-| **Engenharia de Dados** | Pandas, Pydantic, SQLAlchemy, Psycopg2 | Últimas |
-| **Backend & API** | FastAPI, Uvicorn | 0.110+ |
-| **Frontend Web** | Next.js, React, Tailwind CSS | 14+ |
-| **Business Intelligence** | Power BI Desktop (DAX) | - |
-| **Ambiente & Deploy** | Docker, Docker Compose, Vercel | - |
-
----
-
-### 📂 Estrutura de Pastas e Módulos
+## 📐 Arquitetura do Sistema
 
 ```text
-.
-├── docs/                      # Documentação detalhada e modularizada do projeto
-│   ├── 00-overview/           # Visão macro da arquitetura
-│   ├── 01-architecture/       # Decisões de arquitetura (ADRs) e fluxos de dados
-│   ├── 02-database/           # DDL.sql, Diagrama ER e Dicionário de dados
-│   ├── 03-business-rules/     # Fórmulas de preço médio, patrimônio e data quality
-│   ├── 04-etl-pipelines/      # Regras de quarentena, logs e idempotência
-│   ├── 05-api/                # Schemas Pydantic e contratos de rotas
-│   └── 06-frontend-bi/        # Medidas DAX e guia visual
-├── src/
-│   ├── api/                   # Aplicação FastAPI (rotas, controllers)
-│   ├── etl/                   # Scripts de extração, tratamento e validação (Pandas)
-│   ├── database/              # Conexão, migrations e modelos SQLAlchemy
-│   ├── workers/               # Script de mensageria e disparo de alertas
-│   └── web/                   # Aplicação Next.js (Dashboard)
-├── docker-compose.yml         # Containerização do PostgreSQL e instâncias
-├── .env.example               # Modelo de variáveis de ambiente
-├── requirements.txt           # Dependências do ecossistema Python
-└── README.md                  # Este arquivo de apresentação
+[ Extratos CSV/Excel ] ──► [ Engine ETL (Python/Pandas) ] ──► [ PostgreSQL 15+ ] ──► [ FastAPI REST API ] ──► [ Next.js Dashboard ]
+[ APIs de Mercado ]    ──► [ Validação Pydantic v2 ]       │                  │
+                                                            ├──► [ JSONB Audit ] └──► [ Power BI Reports ]
+                                                            └──► [ PTAX Cambial]
+
+```
+
+### Principais Pilares Técnicos
+
+1. **Deduplicação & Idempotência (SHA-256):** Hashing determinístico em dois níveis (arquivo e transação individual).
+2. **Segregação de Fluxo Operacional:** Separação estrita entre `RECEITA`, `DESPESA` (custo de vida) e `INVESTIMENTO` (alocação de capital em ativos), garantindo que compras de ações não distorçam o teto orçamentário.
+3. **Multimoeda & PTAX (USD/BRL):** Avaliação patrimonial com conversão automática de ativos cotados em Dólar (`USD`) usando a taxa oficial PTAX de fechamento do Banco Central do Brasil.
+4. **Governança & Quarentena:** Isolamento de registros corrompidos em arquivo CSV de quarentena sem interromper o lote de carga.
+5. **Schema Evolution:** Controle evolutivo de banco de dados e migrações DDL via **Alembic**.
+
+---
+
+## 📂 Estrutura da Documentação (`/docs`)
+
+A documentação técnica do ecossistema está organizada sequencialmente:
+
+| Diretório | Descrição e Conteúdo |
+| --- | --- |
+| **[`docs/00-architecture`](https://www.google.com/search?q=./docs/00-architecture)** | Arquitetura geral do sistema, diagramas de fluxo e decisões de design (ADRs). |
+| **[`docs/01-requirements`](https://www.google.com/search?q=./docs/01-requirements)** | Requisitos funcionais (RFs) e não funcionais (RNFs). |
+| **[`docs/02-database`](https://www.google.com/search?q=./docs/02-database)** | Script `ddl.sql` (v1.2.0), Dicionário de Dados e diagramas ER. |
+| **[`docs/03-business-rules`](https://www.google.com/search?q=./docs/03-business-rules)** | Fórmulas matematicas de Preço Médio, PTAX, regras de liquidez e quarentena. |
+| **[`docs/04-etl-pipelines`](https://www.google.com/search?q=./docs/04-etl-pipelines)** | Mapeamentos Source-to-Target, tratamento de erros e idempotência. |
+| **[`docs/05-api`](https://www.google.com/search?q=./docs/05-api)** | Contratos Pydantic DTOs e especificação dos endpoints REST do FastAPI. |
+| **[`docs/06-frontend-bi`](https://www.google.com/search?q=./docs/06-frontend-bi)** | Catálogo de medidas DAX para o Power BI e guia visual/paleta semântica. |
+| **[`docs/07-ops-dev`](https://www.google.com/search?q=./docs/07-ops-dev)** | Guia de instalação local, Docker Compose e dicionário de `.env`. |
+| **[`docs/08-archive`](https://www.google.com/search?q=./docs/08-archive)** | Histórico de alterações e especificações descontinuadas. |
+
+---
+
+## 🛠️ Stack Tecnológica
+
+* **Linguagem & Core:** Python 3.12+ / Pandas / Pydantic v2
+* **Banco de Dados:** PostgreSQL 15+ / SQLAlchemy ORM / Alembic Migrations
+* **Backend API:** FastAPI / Uvicorn
+* **Frontend Web:** Next.js 14 / TypeScript / Tailwind CSS
+* **Business Intelligence:** Power BI Desktop (DAX / Tabular Model)
+* **DevOps & Infra:** Docker / Docker Compose / Git
+
+---
+
+## 🚀 Como Executar o Projeto Localmente
+
+### 1. Subir a Infraestrutura (PostgreSQL)
+
+```bash
+cp .env.example .env
+docker-compose up -d postgres
+
+```
+
+### 2. Configurar o Ambiente Python e Aplicar Migrações
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # No Windows: .venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+# Aplicar migrações do banco com Alembic
+alembic upgrade head
+
+```
+
+### 3. Executar o Backend API (FastAPI)
+
+```bash
+uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8000
+
+```
+
+* **Swagger UI:** `http://localhost:8000/docs`
+
+```
+
+---
+
+<ElicitationsGroup message="A documentação institucional e técnica está 100% pronta e consolidada. Deseja iniciar a implementação da Fase 1 em código Python?">
+  <Elicitation label="Criar conexão SQLAlchemy e gerenciador de sessões (src/database/database.py)" query="Inicie a Fase 1 da implementação técnica: crie o arquivo src/database/database.py com a conexão SQLAlchemy e o gerenciador de sessões."/>
+  <Elicitation label="Mapear modelos ORM no Python (src/database/models.py)" query="Gere o arquivo src/database/models.py com todos os modelos ORM das tabelas atualizadas usando SQLAlchemy."/>
+</ElicitationsGroup>
+
+```
