@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ecosystem-financeiro"
-version = "1.0.0"
+name = "pera"
+version = "1.2.0"
 description = "Plataforma analítica e operacional integrada para gestão financeira e de investimentos (ETL, PostgreSQL, FastAPI, Next.js, Power BI)."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -38,6 +38,7 @@ dependencies = [
     "pydantic>=2.6.0",
     "pydantic-settings>=2.2.0",
     "sqlalchemy>=2.0.28",
+    "alembic>=1.13.0",
     "psycopg2-binary>=2.9.9",
     "pandas>=2.2.0",
     "requests>=2.31.0",
@@ -57,9 +58,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/alesgc/ecosystem-financeiro"
-Repository = "https://github.com/alesgc/ecosystem-financeiro.git"
-Documentation = "https://github.com/alesgc/ecosystem-financeiro/tree/main/docs"
+Homepage = "https://github.com/alesgc/pera"
+Repository = "https://github.com/alesgc/pera.git"
+Documentation = "https://github.com/alesgc/pera/tree/main/docs"
 
 # ==========================================
 # CONFIGURAÇÕES DAS FERRAMENTAS DE DEV
